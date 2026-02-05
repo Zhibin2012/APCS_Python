@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "version": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["title", "version"]
+    },
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "name": { "type": "string" },
+          "focus": { "type": "string" },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "title": { "type": "string" },
+                "desc": { "type": "string" },
+                "implementation": { "type": "string" },
+                "py_syntax": { "type": "array", "items": { "type": "string" } },
+                "common_pitfalls": { "type": "array", "items": { "type": "string" } },
+                "mini_examples": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": { "type": "string" },
+                      "type": { "enum": ["code", "io", "note"] },
+                      "content": { "type": "string" }
+                    }
+                  }
+                }
+              },
+              "required": ["id", "title", "py_syntax"]
+            }
+          }
+        },
+        "required": ["level", "name", "categories"]
+      }
+    }
+  },
+  "required": ["meta", "levels"]
+}

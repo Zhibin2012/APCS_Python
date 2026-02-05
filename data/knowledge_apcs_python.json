@@ -1,0 +1,334 @@
+{
+  "meta": {
+    "title": "APCS Python 知識庫",
+    "version": "1.1.0",
+    "updated_at": "2026-02-05"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "name": "程式設計觀念",
+      "focus": "基本語法、變數型態與簡單運算",
+      "categories": [
+        {
+          "id": "l1_variable",
+          "title": "變數與資料型態",
+          "desc": "認識 Python 基本型態與變數賦值",
+          "implementation": "Python 為動態型別語言，不需宣告型態，但需注意隱式轉型問題",
+          "py_syntax": ["int", "float", "str", "bool", "type()"],
+          "common_pitfalls": ["整數除法用 / 會得到 float，應用 //", "字串與數字不能直接相加"],
+          "mini_examples": [
+            {
+              "title": "變數賦值與型態檢查",
+              "type": "code",
+              "content": "x = 10\ny = 3.14\nname = 'APCS'\nprint(type(x))   # <class 'int'>\nprint(type(y))   # <class 'float'>"
+            }
+          ]
+        },
+        {
+          "id": "l1_operator",
+          "title": "運算子與表達式",
+          "desc": "算術、比較與邏輯運算子的使用",
+          "implementation": "注意運算子優先順序，善用括號避免歧義",
+          "py_syntax": ["+", "-", "*", "//", "%", "**", "==", "!=", "and", "or", "not"],
+          "common_pitfalls": ["混淆 = (賦值) 與 == (比較)", "% 取餘數搭配負數時結果可能不如預期"],
+          "mini_examples": [
+            {
+              "title": "常用運算範例",
+              "type": "code",
+              "content": "a, b = 17, 5\nprint(a // b)  # 3 (整數除法)\nprint(a % b)   # 2 (取餘數)\nprint(a ** 2)  # 289 (次方)"
+            }
+          ]
+        },
+        {
+          "id": "l1_condition",
+          "title": "條件判斷",
+          "desc": "使用 if-elif-else 控制程式流程",
+          "implementation": "注意縮排一致性，Python 以縮排定義區塊",
+          "py_syntax": ["if", "elif", "else", "if...and...", "if...or..."],
+          "common_pitfalls": ["忘記冒號 (:) 導致 SyntaxError", "縮排混用 Tab 與空格"],
+          "mini_examples": [
+            {
+              "title": "成績等第判斷",
+              "type": "code",
+              "content": "score = int(input())\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelse:\n    print('F')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "基礎程式設計能力",
+      "focus": "變數、邏輯判斷與基礎迴圈應用",
+      "categories": [
+        {
+          "id": "l2_io",
+          "title": "輸入與輸出",
+          "desc": "處理 APCS 測資與格式化輸出",
+          "implementation": "使用 sys.stdin 提高效率，利用 f-string 控制格式",
+          "py_syntax": ["input()", "print(f'...')", "sys.stdin.readline"],
+          "common_pitfalls": ["忘了 split() 導致輸入變成整串字串", "print 多出空格導致 PE"],
+          "mini_examples": [
+            {
+              "title": "快速讀取整數列表",
+              "type": "code",
+              "content": "import sys\nnums = list(map(int, sys.stdin.read().split()))"
+            }
+          ]
+        },
+        {
+          "id": "l2_loop",
+          "title": "迴圈結構",
+          "desc": "使用 for 與 while 處理重複邏輯",
+          "implementation": "for 搭配 range() 處理計次迴圈，while 處理條件迴圈",
+          "py_syntax": ["for i in range(n):", "while condition:", "break", "continue"],
+          "common_pitfalls": ["range(n) 不包含 n，容易少算一次", "while 忘了更新條件變數導致無窮迴圈"],
+          "mini_examples": [
+            {
+              "title": "計算 1 到 N 的總和",
+              "type": "code",
+              "content": "n = int(input())\ntotal = 0\nfor i in range(1, n + 1):\n    total += i\nprint(total)"
+            },
+            {
+              "title": "while 迴圈讀取到 0 結束",
+              "type": "code",
+              "content": "while True:\n    x = int(input())\n    if x == 0:\n        break\n    print(x * 2)"
+            }
+          ]
+        },
+        {
+          "id": "l2_string",
+          "title": "字串處理",
+          "desc": "字串切片、搜尋與基本操作",
+          "implementation": "Python 字串為不可變物件，操作會產生新字串",
+          "py_syntax": ["s[i]", "s[a:b]", "s.split()", "s.find()", "s.replace()", "len(s)"],
+          "common_pitfalls": ["索引從 0 開始，s[len(s)] 會越界", "字串不可變，不能用 s[i] = 'x' 修改"],
+          "mini_examples": [
+            {
+              "title": "反轉字串",
+              "type": "code",
+              "content": "s = input()\nprint(s[::-1])"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "程式設計實作能力",
+      "focus": "陣列操作、函式設計與排序應用",
+      "categories": [
+        {
+          "id": "l3_list",
+          "title": "串列 (List) 操作",
+          "desc": "使用串列儲存與處理序列資料",
+          "implementation": "善用 list comprehension 簡化程式碼，注意淺拷貝與深拷貝差異",
+          "py_syntax": ["list()", "append()", "pop()", "sort()", "len()", "[x for x in ...]"],
+          "common_pitfalls": ["用 a = b 複製串列只是參考，修改 b 會影響 a", "sort() 是原地排序無回傳值，sorted() 才會回傳新串列"],
+          "mini_examples": [
+            {
+              "title": "List Comprehension 過濾偶數",
+              "type": "code",
+              "content": "nums = [1, 2, 3, 4, 5, 6]\nevens = [x for x in nums if x % 2 == 0]\nprint(evens)  # [2, 4, 6]"
+            }
+          ]
+        },
+        {
+          "id": "l3_function",
+          "title": "函式設計",
+          "desc": "將重複邏輯封裝為函式，提升可讀性與重用性",
+          "implementation": "注意參數傳遞方式，可變物件 (list, dict) 傳參考",
+          "py_syntax": ["def func(args):", "return", "lambda x: x", "def func(*args):"],
+          "common_pitfalls": ["預設參數使用可變物件 (如 def f(a=[])：) 會導致共用狀態", "忘了 return 導致函式回傳 None"],
+          "mini_examples": [
+            {
+              "title": "判斷質數函式",
+              "type": "code",
+              "content": "def is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True"
+            }
+          ]
+        },
+        {
+          "id": "l3_sorting",
+          "title": "排序與搜尋",
+          "desc": "內建排序與二分搜尋的使用時機",
+          "implementation": "Python 內建 Timsort 為 O(n log n)，搭配 bisect 模組做二分搜尋",
+          "py_syntax": ["sorted()", ".sort()", "key=lambda", "bisect.bisect_left", "bisect.insort"],
+          "common_pitfalls": ["自訂排序 key 忘了回傳值", "二分搜尋的前提是資料已排序"],
+          "mini_examples": [
+            {
+              "title": "依照第二元素排序",
+              "type": "code",
+              "content": "pairs = [(1, 3), (2, 1), (3, 2)]\npairs.sort(key=lambda x: x[1])\nprint(pairs)  # [(2, 1), (3, 2), (1, 3)]"
+            },
+            {
+              "title": "二分搜尋",
+              "type": "code",
+              "content": "from bisect import bisect_left\n\narr = [1, 3, 5, 7, 9]\nidx = bisect_left(arr, 5)\nprint(idx)  # 2"
+            }
+          ]
+        },
+        {
+          "id": "l3_2d_array",
+          "title": "二維陣列",
+          "desc": "使用巢狀串列處理矩陣與格子問題",
+          "implementation": "初始化二維陣列需用 comprehension，避免淺拷貝陷阱",
+          "py_syntax": ["[[0]*m for _ in range(n)]", "grid[r][c]", "enumerate()"],
+          "common_pitfalls": ["[[0]*m]*n 會讓每列指向同一物件", "存取超出邊界未檢查導致 IndexError"],
+          "mini_examples": [
+            {
+              "title": "建立並走訪二維陣列",
+              "type": "code",
+              "content": "n, m = 3, 4\ngrid = [[0] * m for _ in range(n)]\nfor r in range(n):\n    for c in range(m):\n        grid[r][c] = r * m + c\nprint(grid)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "基礎資料結構運用",
+      "focus": "遞迴、搜尋與線性資料結構",
+      "categories": [
+        {
+          "id": "l4_recursion",
+          "title": "遞迴與 DFS",
+          "desc": "分解問題，處理樹狀或圖狀搜尋",
+          "implementation": "必須設定遞迴深度，注意終止條件",
+          "py_syntax": ["sys.setrecursionlimit", "def dfs(v):"],
+          "common_pitfalls": ["遞迴太深導致 RecursionError", "忘了標記 visited 導致死迴圈"],
+          "mini_examples": [
+            {
+              "title": "DFS 遍歷框架",
+              "type": "code",
+              "content": "def dfs(u):\n    visited.add(u)\n    for v in adj[u]:\n        if v not in visited:\n            dfs(v)"
+            }
+          ]
+        },
+        {
+          "id": "l4_bfs",
+          "title": "BFS 廣度優先搜尋",
+          "desc": "利用佇列進行逐層搜尋，適用最短路徑問題",
+          "implementation": "使用 collections.deque 實作佇列，避免用 list.pop(0) 造成 O(n)",
+          "py_syntax": ["from collections import deque", "deque.append()", "deque.popleft()"],
+          "common_pitfalls": ["用 list 當佇列效能差", "忘了在入隊時標記 visited 導致重複拜訪"],
+          "mini_examples": [
+            {
+              "title": "BFS 最短路徑框架",
+              "type": "code",
+              "content": "from collections import deque\n\ndef bfs(start):\n    q = deque([start])\n    visited = {start}\n    dist = {start: 0}\n    while q:\n        u = q.popleft()\n        for v in adj[u]:\n            if v not in visited:\n                visited.add(v)\n                dist[v] = dist[u] + 1\n                q.append(v)\n    return dist"
+            }
+          ]
+        },
+        {
+          "id": "l4_stack_queue",
+          "title": "堆疊與佇列",
+          "desc": "使用堆疊 (Stack) 與佇列 (Queue) 解決特定問題",
+          "implementation": "堆疊用 list 即可，佇列務必使用 deque",
+          "py_syntax": ["list.append()", "list.pop()", "deque.append()", "deque.popleft()"],
+          "common_pitfalls": ["堆疊 pop() 取最後元素，佇列 popleft() 取第一個", "空容器呼叫 pop 會拋出 IndexError"],
+          "mini_examples": [
+            {
+              "title": "括號配對檢查",
+              "type": "code",
+              "content": "def is_valid(s):\n    stack = []\n    match = {')': '(', ']': '[', '}': '{'}\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in ')]}':\n            if not stack or stack[-1] != match[ch]:\n                return False\n            stack.pop()\n    return len(stack) == 0"
+            }
+          ]
+        },
+        {
+          "id": "l4_dict_set",
+          "title": "字典與集合",
+          "desc": "利用雜湊結構實現快速查找與去重",
+          "implementation": "dict 與 set 的查找為 O(1)，適合計數與存在性檢查",
+          "py_syntax": ["dict()", "set()", "defaultdict()", "Counter()", "in"],
+          "common_pitfalls": ["存取不存在的 key 會拋出 KeyError，應用 get() 或 defaultdict", "set 是無序的，不能用索引存取"],
+          "mini_examples": [
+            {
+              "title": "字元頻率計數",
+              "type": "code",
+              "content": "from collections import Counter\n\ns = 'abracadabra'\nfreq = Counter(s)\nprint(freq.most_common(3))\n# [('a', 5), ('b', 2), ('r', 2)]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "進階資料結構與演算法",
+      "focus": "動態規劃、圖論演算法與進階資料結構",
+      "categories": [
+        {
+          "id": "l5_dp",
+          "title": "動態規劃 (DP)",
+          "desc": "透過子問題分解與記憶化避免重複計算",
+          "implementation": "先定義狀態與轉移方程式，可用 Top-down (記憶化遞迴) 或 Bottom-up (迭代表格)",
+          "py_syntax": ["dp = [0] * (n+1)", "@functools.lru_cache", "dp[i] = dp[i-1] + dp[i-2]"],
+          "common_pitfalls": ["狀態定義不明確導致轉移方程式錯誤", "忘了初始化邊界條件 (base case)", "二維 DP 表格初始化用 [[0]*m]*n 造成共用參考"],
+          "mini_examples": [
+            {
+              "title": "費氏數列 (Bottom-up)",
+              "type": "code",
+              "content": "def fib(n):\n    if n <= 1:\n        return n\n    dp = [0] * (n + 1)\n    dp[1] = 1\n    for i in range(2, n + 1):\n        dp[i] = dp[i-1] + dp[i-2]\n    return dp[n]"
+            },
+            {
+              "title": "0/1 背包問題",
+              "type": "code",
+              "content": "def knapsack(W, weights, values):\n    n = len(weights)\n    dp = [0] * (W + 1)\n    for i in range(n):\n        for w in range(W, weights[i] - 1, -1):\n            dp[w] = max(dp[w], dp[w - weights[i]] + values[i])\n    return dp[W]"
+            }
+          ]
+        },
+        {
+          "id": "l5_graph",
+          "title": "圖論演算法",
+          "desc": "最短路徑、拓撲排序與最小生成樹",
+          "implementation": "依題目特性選擇 Dijkstra、BFS 或 Bellman-Ford",
+          "py_syntax": ["heapq.heappush()", "heapq.heappop()", "adj = defaultdict(list)", "indegree = [0] * n"],
+          "common_pitfalls": ["Dijkstra 不適用於負權邊", "拓撲排序只適用 DAG (有向無環圖)", "忘了處理圖不連通的情況"],
+          "mini_examples": [
+            {
+              "title": "Dijkstra 最短路徑",
+              "type": "code",
+              "content": "import heapq\nfrom collections import defaultdict\n\ndef dijkstra(n, adj, src):\n    dist = [float('inf')] * n\n    dist[src] = 0\n    pq = [(0, src)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist[u]:\n            continue\n        for v, w in adj[u]:\n            if dist[u] + w < dist[v]:\n                dist[v] = dist[u] + w\n                heapq.heappush(pq, (dist[v], v))\n    return dist"
+            },
+            {
+              "title": "拓撲排序 (Kahn's Algorithm)",
+              "type": "code",
+              "content": "from collections import deque\n\ndef topo_sort(n, adj, indegree):\n    q = deque(i for i in range(n) if indegree[i] == 0)\n    order = []\n    while q:\n        u = q.popleft()\n        order.append(u)\n        for v in adj[u]:\n            indegree[v] -= 1\n            if indegree[v] == 0:\n                q.append(v)\n    return order if len(order) == n else []"
+            }
+          ]
+        },
+        {
+          "id": "l5_greedy",
+          "title": "貪心演算法",
+          "desc": "每步選擇當前最佳解，適用於具貪心性質的問題",
+          "implementation": "先排序再逐一處理，需證明局部最佳可推導全域最佳",
+          "py_syntax": ["sorted()", "heapq", "key=lambda"],
+          "common_pitfalls": ["未驗證貪心策略的正確性就直接套用", "排序的比較基準選錯導致答案錯誤"],
+          "mini_examples": [
+            {
+              "title": "區間排程 (Activity Selection)",
+              "type": "code",
+              "content": "def max_activities(intervals):\n    intervals.sort(key=lambda x: x[1])\n    count = 0\n    end = -1\n    for s, e in intervals:\n        if s >= end:\n            count += 1\n            end = e\n    return count"
+            }
+          ]
+        },
+        {
+          "id": "l5_divide_conquer",
+          "title": "分治法",
+          "desc": "將問題拆分為子問題，分別求解後合併",
+          "implementation": "找出分割點與合併方式，遞迴處理子問題",
+          "py_syntax": ["def solve(l, r):", "mid = (l + r) // 2", "merge()"],
+          "common_pitfalls": ["分割到只剩一個元素時忘了回傳 (base case)", "合併步驟的複雜度太高導致整體退化"],
+          "mini_examples": [
+            {
+              "title": "合併排序 (Merge Sort)",
+              "type": "code",
+              "content": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
